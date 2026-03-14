@@ -52,19 +52,21 @@ module.exports = async () => {
 ```javascript
 const easyNodeThreading = require('easy-node-threading');
 
+const options = {
+    // --| workerOptions here
+    resourceLimits: {
+        maxOldGenerationSizeMb: 64,         // --| Limit memory usage
+        codeRangeSizeMb: 4
+    },
+    execArgv: ['--trace-warnings'],         // --| Node.js flags for worker
+    env: { NODE_ENV: 'worker' }             // --| Set environment
+};
+
 (async () => {
     const result = await easyNodeThreading(
-        './task.js',                                // --| File to run
-        {
-            // --| workerOptions here
-            resourceLimits: {
-                maxOldGenerationSizeMb: 64,         // --| Limit memory usage
-                codeRangeSizeMb: 4
-            },
-            execArgv: ['--trace-warnings'],         // --| Node.js flags for worker
-            env: { NODE_ENV: 'worker' }             // --| Set environment
-        },
-        true                                        // --| Show logs
+        './task.js',                                    // --| File to run
+        options,                                        // --| Worker options object
+        true                                            // --| Show logs
     );
 
     console.log('File task result:', result);
@@ -105,19 +107,21 @@ export default async () => {
 ```javascript
 import easyNodeThreading from "easy-node-threading";
 
+const options = {
+    // --| workerOptions here
+    resourceLimits: {
+        maxOldGenerationSizeMb: 64,         // --| Limit memory usage
+        codeRangeSizeMb: 4
+    },
+    execArgv: ['--trace-warnings'],         // --| Node.js flags for worker
+    env: { NODE_ENV: 'worker' }             // --| Set environment
+};
+
 (async () => {
     const result = await easyNodeThreading(
-        './task.mjs',                               // --| File to run
-        {
-            // --| workerOptions here
-            resourceLimits: {
-                maxOldGenerationSizeMb: 64,         // --| Limit memory usage
-                codeRangeSizeMb: 4
-            },
-            execArgv: ['--trace-warnings'],         // --| Node.js flags for worker
-            env: { NODE_ENV: 'worker' }             // --| Set environment
-        },
-        true                                        // --| Show logs
+        './task.mjs',                                   // --| File to run
+        options,                                        // --| Worker options object
+        true                                            // --| Show logs
     );
 
     console.log('File task result:', result);
@@ -157,6 +161,7 @@ export default async () => {
 ### How to use in TypeScript
 ```javascript
 import easyNodeThreading from "easy-node-threading";
+import { WorkerOptions } from 'node:worker_threads';
 
 const taskFunction = (): number => {
     let sum = 0;
@@ -167,18 +172,20 @@ const taskFunction = (): number => {
     return sum;
 };
 
+const options: WorkerOptions  = {
+    // --| workerOptions here
+    resourceLimits: {
+        maxOldGenerationSizeMb: 64,         // --| Limit memory usage
+        codeRangeSizeMb: 4
+    },
+    execArgv: ['--trace-warnings'],         // --| Node.js flags for worker
+    env: { NODE_ENV: 'worker' }             // --| Set environment
+};
+
 (async () => {
     const result = await easyNodeThreading(
         './task.mjs',                               // --| File to run (NOTICE WE RUNNING A .mjs EXTENSION!)
-        {
-            // --| workerOptions here
-            resourceLimits: {
-                maxOldGenerationSizeMb: 64,         // --| Limit memory usage
-                codeRangeSizeMb: 4
-            },
-            execArgv: ['--trace-warnings'],         // --| Node.js flags for worker
-            env: { NODE_ENV: 'worker' }             // --| Set environment
-        },
+        options,                                    // --| Worker options object
         true                                        // --| Show logs
     );
 

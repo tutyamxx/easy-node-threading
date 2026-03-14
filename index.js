@@ -1,6 +1,6 @@
 /**
  *  easy-node-threading - ⚡ Run JavaScript functions or files in isolated Node.js worker threads with a single call. Simple, minimal, and modern.
- *  @version: v1.0.2
+ *  @version: v1.0.3
  *  @link: https://github.com/tutyamxx/easy-node-threading
  *  @license: MIT
  **/
@@ -9,6 +9,11 @@
 import { Worker } from 'node:worker_threads';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, resolve } from 'node:path';
+
+// --| Silences logs automatically if running under Jest
+if (process.env.JEST_WORKER_ID) {
+    console.log = () => {};
+}
 
 const moduleDirectory = dirname(fileURLToPath(import.meta.url));
 const workerScriptPath = resolve(moduleDirectory, 'worker.js');

@@ -1,5 +1,10 @@
 import { parentPort, workerData, threadId } from 'node:worker_threads';
 
+// --| Silences logs automatically if running under Jest
+if (process.env.JEST_WORKER_ID) {
+    console.log = () => {};
+}
+
 /**
  * Executes the task sent to this worker, either a function or a file.
  *

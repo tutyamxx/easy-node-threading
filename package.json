@@ -1,6 +1,6 @@
 {
   "name": "easy-node-threading",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "⚡ Run JavaScript functions or files in isolated Node.js worker threads with a single call. Simple, minimal, and modern.",
   "type": "module",
   "main": "index.js",
@@ -12,7 +12,7 @@
     }
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
