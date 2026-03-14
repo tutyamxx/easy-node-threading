@@ -1,0 +1,49 @@
+{
+  "name": "easy-node-threading",
+  "version": "1.0.0",
+  "description": "⚡ Run JavaScript functions or files in isolated Node.js worker threads with a single call. Simple, minimal, and modern.",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.cjs",
+      "types": "./index.d.ts"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tutyamxx/easy-node-threading.git"
+  },
+  "keywords": [
+    "worker",
+    "worker-threads",
+    "threads",
+    "thread",
+    "node-worker",
+    "node-worker-threads",
+    "parallel",
+    "parallelism",
+    "concurrency",
+    "multithreading",
+    "background-task",
+    "task-runner",
+    "thread-runner",
+    "nodejs",
+    "node",
+    "async",
+    "utility"
+  ],
+  "author": "tuty",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tutyamxx/easy-node-threading/issues"
+  },
+  "homepage": "https://github.com/tutyamxx/easy-node-threading#readme",
+  "devDependencies": {
+    "jest": "^30.3.0"
+  }
+}
