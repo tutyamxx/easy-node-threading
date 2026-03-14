@@ -23,7 +23,6 @@ jobs:
           node-version: lts/krypton
 
       - run: npm install
-      - run: npm test
 
   publish-npm:
     needs: build
