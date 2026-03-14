@@ -73,7 +73,7 @@ const options = {
 
     // --| Or use a function directly from here, rather than an external file
     const resultFromFunction = await easyNodeThreading(taskFunction, {}, false);
-    console.log("Function task result:", resultFromFunction);
+    console.log('Function task result:', resultFromFunction);
 })();
 
 const taskFunction = () => {
@@ -92,7 +92,7 @@ const taskFunction = () => {
 ```javascript
 // --| task.mjs (ESM)
 export default async () => {
-    console.log("Running heavy calculation inside the worker...");
+    console.log('Running heavy calculation inside the worker...');
 
     let sum = 0;
     for (let i = 0; i < 1e7; i++) {
@@ -105,7 +105,7 @@ export default async () => {
 
 ### How to use in ESM
 ```javascript
-import easyNodeThreading from "easy-node-threading";
+import easyNodeThreading from 'easy-node-threading';
 
 const options = {
     // --| workerOptions here
@@ -147,7 +147,7 @@ const taskFunction = () => {
 ```javascript
 // --| task.mjs (ESM)
 export default async () => {
-    console.log("Running heavy calculation inside the worker...");
+    console.log('Running heavy calculation inside the worker...');
 
     let sum = 0;
     for (let i = 0; i < 1e7; i++) {
@@ -160,7 +160,7 @@ export default async () => {
 
 ### How to use in TypeScript
 ```javascript
-import easyNodeThreading from "easy-node-threading";
+import easyNodeThreading from 'easy-node-threading';
 import { WorkerOptions } from 'node:worker_threads';
 
 const taskFunction = (): number => {
@@ -189,7 +189,7 @@ const options: WorkerOptions  = {
         true                                        // --| Show logs
     );
 
-    console.log("File task result:", result);
+    console.log('File task result:', result);
 
     // --| Or use a function directly from here, rather than an external file
     const resultFromFunction = await easyNodeThreading(taskFunction, {}, false);
@@ -218,9 +218,7 @@ const task2 = () => {
     return `Task2 result: ${product}`;
 };
 
-const task3 = () => {
-    return `Task3 message at ${new Date().toISOString()}`;
-};
+const task3 = () => `Task3 message at ${new Date().toISOString()}`;
 
 (async () => {
     // --| Start 3 workers in parallel
@@ -233,7 +231,7 @@ const task3 = () => {
     // --| Wait for all workers to complete
     const results = await Promise.all(workers);
 
-    console.log("All worker results:");
+    console.log('All worker results:');
     results.forEach(result => console.log(result));
 })();
 ```
