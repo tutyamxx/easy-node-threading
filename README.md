@@ -29,7 +29,15 @@ $ npm i easy-node-threading
 # 💻 Usage
 
 - See examples below for each scenario!
+- For **file tasks**, always convert the path to a **file URL** using `pathToFileURL` for ESM compatibility.
+- By default, `showLogs = true` prints both parent and worker messages. Set it to `false` to silence logs.
 - For `workerOptions` object param, please see the list of available options here ➡ 🔗 https://nodejs.org/api/worker_threads.html#new-workerfilename-options
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `task` | `Function` or `string` | — | The function to execute in the worker, or a path/URL to a JavaScript file. |
+| `workerOptions` | `Object` | `{}` | Optional options passed directly to the Node.js `Worker` constructor (e.g., `resourceLimits`, `execArgv`). |
+| `showLogs` | `boolean` | `true` | Whether to log messages from the parent and worker threads to the console. Set to `false` to hide logs. |
 
 ## CommonJS
 

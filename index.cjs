@@ -1,6 +1,6 @@
 /**
  *  easy-node-threading - ⚡ Run JavaScript functions or files in isolated Node.js worker threads with a single call. Simple, minimal, and modern.
- *  @version: v1.0.5
+ *  @version: v1.0.6
  *  @link: https://github.com/tutyamxx/easy-node-threading
  *  @license: MIT
  **/
@@ -36,6 +36,10 @@ const loadThreadModule = async () => {
  * @returns {Promise<any>}
  * Resolves with the result returned from the worker.
  */
-const easyNodeThreading = (task, workerOptions = {}, showLogs = true) => loadThreadModule().then(threadModule => threadModule?.default(task, workerOptions, showLogs));
+const easyNodeThreading = async (task, workerOptions = {}, showLogs = true) => {
+    return loadThreadModule().then(threadModule => {
+        return threadModule?.default(task, workerOptions, showLogs);
+    });
+};
 
 module.exports = easyNodeThreading;

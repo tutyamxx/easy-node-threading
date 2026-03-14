@@ -29,8 +29,20 @@ describe('easy-node-threading', () => {
         expect(result).toBe(42);
     });
 
+    test('Runs a file task with async default export', async () => {
+        const __dirname = path.dirname(fileURLToPath(import.meta.url));
+        const filePath = path.resolve(__dirname, 'task.js');
+
+        const result = await easyNodeThreading(filePath);
+        expect(result).toBe(42);
+    });
+
     test('Throws when the worker task fails', async () => {
         await expect(easyNodeThreading(() => { throw new Error('fail'); })).rejects.toThrow('fail');
+    });
+
+    test('Throws when async worker fails', async () => {
+        await expect(easyNodeThreading(async () => { throw new Error('async fail'); })).rejects.toThrow('async fail');
     });
 
     test('Handles invalid file path', async () => {
@@ -85,5 +97,29 @@ describe('easy-node-threading', () => {
         ]);
 
         expect(results).toEqual([123, 'abc', { key: 'value' }, [1, 2, 3]]);
+    });
+
+    test('Handles undefined task return', async () => {
+        const result = await easyNodeThreading(() => {});
+        expect(result).toBeUndefined();
+    });
+
+    test('Handles null task return', async () => {
+        const result = await easyNodeThreading(() => null);
+        expect(result).toBeNull();
+    });
+
+    test('Supports workerOptions', async () => {
+        const result = await easyNodeThreading(() => 1, { resourceLimits: { maxOldGenerationSizeMb: 16 } });
+        expect(result).toBe(1);
+    });
+
+    test('Can run the same worker multiple times', async () => {
+        const results = await Promise.all([
+            easyNodeThreading(() => 1),
+            easyNodeThreading(() => 2),
+            easyNodeThreading(() => 3)
+        ]);
+        expect(results).toEqual([1, 2, 3]);
     });
 });
