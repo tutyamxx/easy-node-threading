@@ -24,7 +24,7 @@ const executeTask = async () => {
      * @param {string} msg The message to log
      */
     const logOnlyIfNeeded = (msg) => showLogs && console.log(`[👷 Worker #${threadId ?? 0}] ${msg}`);
-    logOnlyIfNeeded("Starting task...");
+    logOnlyIfNeeded('Starting task...');
 
     // --| Resolve the task function based on type
     const taskFunction = taskType === 'file'
@@ -34,7 +34,7 @@ const executeTask = async () => {
     // --| Execute (with a fallback to a no-op if resolution failed)
     const result = await (taskFunction ?? (() => null))();
 
-    logOnlyIfNeeded("Task completed.");
+    logOnlyIfNeeded('Task completed.');
     parentPort?.postMessage?.(result);
 };
 
