@@ -1,6 +1,6 @@
 {
   "name": "easy-node-threading",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "⚡ Run JavaScript functions or files in isolated Node.js worker threads with a single call. Simple, minimal, and modern.",
   "type": "module",
   "main": "index.js",

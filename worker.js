@@ -1,3 +1,11 @@
+/**
+ *  easy-node-threading - ⚡ Run JavaScript functions or files in isolated Node.js worker threads with a single call. Simple, minimal, and modern.
+ *  @version: v1.0.9
+ *  @link: https://github.com/tutyamxx/easy-node-threading
+ *  @license: MIT
+ **/
+
+
 import { parentPort, workerData, threadId } from 'node:worker_threads';
 
 // --| Silences logs automatically if running under Jest
@@ -30,10 +38,10 @@ const executeTask = async () => {
     let taskFunction;
 
     if (taskType === 'file') {
-        const imported = await import(taskSource);
+        const importedFile = await import(taskSource);
 
         // --| Look for default export, then 'run' export, then the module itself
-        taskFunction = imported.default ?? imported.run ?? imported;
+        taskFunction = importedFile.default ?? importedFile.run ?? importedFile;
     } else {
         // --| Evaluate the stringified function
         taskFunction = new Function(`return (${taskSource})`)();
