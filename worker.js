@@ -27,12 +27,25 @@ const executeTask = async () => {
     logOnlyIfNeeded('Starting task...');
 
     // --| Resolve the task function based on type
-    const taskFunction = taskType === 'file'
-        ? (await import(taskSource)).default ?? (await import(taskSource)).run
-        : new Function(`return (${taskSource})`)();
+    let taskFunction;
 
-    // --| Execute (with a fallback to a no-op if resolution failed)
-    const result = await (taskFunction ?? (() => null))();
+    if (taskType === 'file') {
+        const imported = await import(taskSource);
+
+        // --| Look for default export, then 'run' export, then the module itself
+        taskFunction = imported.default ?? imported.run ?? imported;
+    } else {
+        // --| Evaluate the stringified function
+        taskFunction = new Function(`return (${taskSource})`)();
+    }
+
+    // --| Validate task resolution
+    if (typeof taskFunction !== 'function') {
+        throw new Error(`Resolved task is not a function (type: ${typeof taskFunction})`);
+    }
+
+    // --| Execute (handles both sync and async results)
+    const result = await taskFunction();
 
     logOnlyIfNeeded('Task completed.');
     parentPort?.postMessage?.(result);
@@ -44,7 +57,8 @@ const executeTask = async () => {
     } catch (error) {
         parentPort?.postMessage?.({
             error: error?.message ?? 'Worker execution failed',
-            stack: error?.stack ?? null
+            stack: error?.stack ?? null,
+            isWorkerError: true
         });
     }
 })();
