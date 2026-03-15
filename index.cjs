@@ -12,14 +12,7 @@ const { resolve } = require('node:path');
 const threadModuleUrl = pathToFileURL(resolve(__dirname, './index.js')).href;
 
 let threadModuleCache;
-
-const loadThreadModule = async () => {
-    if (!threadModuleCache) {
-        threadModuleCache = await import(threadModuleUrl);
-    }
-
-    return threadModuleCache;
-};
+const loadThreadModule = async () => threadModuleCache ||= await import(threadModuleUrl);
 
 /**
  * Run a function or file in a separate Node.js worker thread.

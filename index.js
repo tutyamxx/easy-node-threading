@@ -67,6 +67,10 @@ const easyNodeThreading = (task, workerOptions = {}, showLogs = true) => {
     return new Promise((resolvePromise, rejectPromise) => {
         const isFunctionTask = typeof task === 'function';
 
+        if (!task) {
+            return reject(new Error('Task is required'));
+        }
+
         const worker = new Worker(workerScriptPath, {
             workerData: {
                 taskType: isFunctionTask ? 'function' : 'file',

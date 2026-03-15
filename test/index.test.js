@@ -122,4 +122,10 @@ describe('easy-node-threading', () => {
         ]);
         expect(results).toEqual([1, 2, 3]);
     });
+
+    test('Should reject if task is missing or invalid', async () => {
+        await expect(easyNodeThreading()).rejects.toThrow();
+        await expect(easyNodeThreading(null)).rejects.toThrow();
+        await expect(easyNodeThreading('')).rejects.toThrow();
+    });
 });
