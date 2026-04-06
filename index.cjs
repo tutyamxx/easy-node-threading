@@ -1,6 +1,6 @@
 /**
  *  easy-node-threading - ⚡ Run JavaScript functions or files in isolated Node.js worker threads with a single call. Simple, minimal, and modern.
- *  @version: v1.1.0
+ *  @version: v1.1.1
  *  @link: https://github.com/tutyamxx/easy-node-threading
  *  @license: MIT
  **/
