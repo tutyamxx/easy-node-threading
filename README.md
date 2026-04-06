@@ -71,11 +71,8 @@ const options = {
 };
 
 (async () => {
-    const result = await easyNodeThreading(
-        './task.js',                                    // --| File to run
-        options,                                        // --| Worker options object
-        true                                            // --| Show logs
-    );
+    // --| File to run | Worker options object | Show logs
+    const result = await easyNodeThreading('./task.js', options, true);
 
     console.log('File task result:', result);
 
@@ -126,11 +123,8 @@ const options = {
 };
 
 (async () => {
-    const result = await easyNodeThreading(
-        './task.mjs',                                   // --| File to run
-        options,                                        // --| Worker options object
-        true                                            // --| Show logs
-    );
+    // --| File to run | Worker options object | Show logs
+    const result = await easyNodeThreading('./task.mjs', options, true);
 
     console.log('File task result:', result);
 
@@ -191,11 +185,8 @@ const options: WorkerOptions  = {
 };
 
 (async () => {
-    const result = await easyNodeThreading(
-        './task.mjs',                               // --| File to run (NOTICE WE RUNNING A .mjs EXTENSION!)
-        options,                                    // --| Worker options object
-        true                                        // --| Show logs
-    );
+    // --| File to run | Worker options object | Show logs
+    const result = await easyNodeThreading('./task.mjs', options, true);
 
     console.log('File task result:', result);
 
